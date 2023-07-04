@@ -1,21 +1,18 @@
-local impatient_ok, impatient = pcall(require, "impatient")
-if impatient_ok then
-  impatient.enable_profile()
-end
-
-for _, source in ipairs {
-  "core.utils",
-  "core.options",
-  "core.plugins",
-  "core.autocmds",
-  "core.mappings",
-  "core.ui",
-  "configs.which-key-register",
-} do
-  local status_ok, fault = pcall(require, source)
-  if not status_ok then
-    vim.api.nvim_err_writeln("Failed to load " .. source .. "\n\n" .. fault)
-  end
-end
-
-astronvim.conditional_func(astronvim.user_plugin_opts("polish", nil, false))
+-- 基础配置
+require("core.basic")
+-- Packer插件管理
+require("plugins")
+-- 快捷键映射
+require("core.keybindings")
+-- 主题设置
+require("plugin-config.colorscheme")
+-- 插件配置
+require("plugin-config.nvim-tree")
+require("plugin-config.bufferline")
+require("plugin-config.lualine")
+require("plugin-config.telescope")
+require("plugin-config.dashboard")
+require("plugin-config.project")
+require("plugin-config.nvim-treesitter")
+require("lsp.setup")
+require("lsp.cmp")

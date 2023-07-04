@@ -9,6 +9,8 @@ set $mod Mod4
 font pango:Open sans 11
 
 ### Runnig apps in background ###
+# run clash for windows
+exec_always --no-startup-id cfw &
 
 # run picom
 exec_always --no-startup-id picom &
@@ -20,8 +22,7 @@ exec_always --no-startup-id mpd &
 exec_always --no-startup-id dunst &
 
 # set wallpaper with fed
-exec_always feh --no-fehbg --bg-scale $HOME/Pictures/wallpapers/background.png
-
+exec_always --no-startup-id ~/Pictures/wallpapers/wallpic.sh
 # launch polybar
 exec_always --no-startup-id killall -q
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
@@ -32,7 +33,8 @@ exec_always --no-startup-id battery&
 # start i3 components
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
-
+# start fcitx5
+exec_always --no-startup-id fcitx5
 ### Shortcuts ###
 
 floating_modifier $mod
@@ -89,21 +91,21 @@ bindsym $mod+y  exec --no-startup-id i3-resurrect save
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+# bindsym $mod+space focus mode_toggle
 
 # run lockscreen
 bindsym $mod+i exec lock
 
 # monitor settings
-bindsym $mod+n exec xrandr --auto --output eDP-1 --mode 1920x1080 --right-of HDMI-1 && i3-msg restart &
-bindsym $mod+m exec xrandr --auto --output HDMI-1 --off && i3-msg restart &
+# bindsym $mod+n exec xrandr --auto --output eDP-1 --mode 1920x1080 --right-of HDMI-1 && i3-msg restart &
+# bindsym $mod+m exec xrandr --auto --output HDMI-1 --off && i3-msg restart &
 
 # toggle polybar
-bindsym $mod+o exec $HOME/.config/polybar/launch.sh
-bindsym $mod+p exec killall -q polybar
+# bindsym $mod+o exec $HOME/.config/polybar/launch.sh
+# bindsym $mod+p exec killall -q polybar
 
 # move workspaces between monitors
-bindsym $mod+b move workspace to output right
+# bindsym $mod+b move workspace to output right
 
 # focus the parent container
 #bindsym $mod+a focus parent
@@ -115,10 +117,11 @@ bindsym $mod+b move workspace to output right
 bindsym $mod+a exec "rofi -show window -no-default-config -config ~/.config/rofi/main.rasi"
 bindsym $mod+d exec "rofi -show drun -no-default-config -config ~/.config/rofi/main.rasi"
 bindsym $mod+s exec "rofi -show drun -no-default-config -config ~/.config/rofi/full_screen.rasi"
-bindsym $mod+z exec "rofi -show  -modi ':rofi-bookmarks' -no-default-config -config ~/.config/rofi/main.rasi"
+# bindsym $mod+z exec "rofi -show  -modi ':rofi-bookmarks' -no-default-config -config ~/.config/rofi/main.rasi"
 bindsym $mod+x exec "rofi-powermenu"
 bindsym $mod+c exec "rofi-screenshot"
-
+bindsym $mod+n exec --no-startup-id networkmanager_dmenu
+bindsym $mod+b exec --no-startup-id rofi-bluetooth
 # take a screenshot
 bindsym Pause exec screenshot -sa
 bindsym Print exec screenshot -sf
